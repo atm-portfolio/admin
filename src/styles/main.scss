@@ -1,0 +1,272 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+body {
+  max-width: 100vw;
+  margin: 0;
+  padding: 0;
+  background-color: #f2f2fd;
+}
+
+a {
+  font-weight: 500;
+  color: $mineShaft;
+  text-decoration: inherit;
+
+  &:hover {
+    @include hovered();
+  }
+}
+
+// General app styles
+.app-status {
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  height: 50px;
+  background-color: $lightOrange;
+  border-bottom: 1px solid $lightGray;
+  text-align: center;
+  line-height: 45px;
+  z-index: 1000;
+}
+
+.app-header {
+  display: grid;
+  grid-template-columns: 1fr max-content min-content;
+  align-items: center;
+  gap: 10px;
+  height: 50px;
+  top: 0;
+  position: fixed;
+  background-color: $blackHaze;
+  border-bottom: 0.3px solid $lightGray;
+  z-index: 999;
+
+  .auth-link {
+    margin: 0 10px 0 0;
+    color: $cornFlowerBlue;
+  }
+
+  h3 {
+    margin: 0 0 0 10px;
+
+    @media (max-width: 768px) {
+      display: none;
+    }
+  }
+
+  .main-menu {
+    margin: 0 10px 0 10px;
+
+    @media (min-width: 769px) {
+      display: none;
+    }
+  }
+}
+
+.app-nav {
+  display: flex;
+  gap: 10px;
+  top: 50px;
+  position: fixed;
+  width: 100vw;
+  height: 30px;
+  background-color: $blackHaze;
+  z-index: 998;
+  align-items: center;
+
+  @media (min-width: 769px) {
+    a:first-of-type {
+      margin: 0 0 0 10px;
+    }
+
+    border-bottom: 0.3px solid $lightGray;
+  }
+
+  @media (max-width: 768px) {
+    display: grid;
+    position: relative;
+    grid-template-rows: 1fr;
+    height: unset;
+    background-color: $blackHaze;
+
+    a {
+      z-index: 2;
+      height: 30px;
+      padding: 0 0 0 10px;
+      border-bottom: 0.3px solid $lightGray;
+    }
+
+    a:first-of-type {
+      margin: 10px 0 0 0;
+    }
+
+    a:last-of-type {
+      border-bottom: 0.3px solid $lightGray;
+    }
+
+    .nav-separator {
+      display: none;
+    }
+  }
+
+  .active {
+    text-decoration: underline;
+  }
+}
+
+.app-content {
+  height: calc(100vh - 120px);
+  position: relative;
+  top: 80px;
+  padding: 0 10px;
+
+  @media (max-width: 768px) {
+    top: 50px;
+  }
+}
+
+.app-login {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+
+  form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border: 1px solid $lightGray;
+    border-radius: 10px;
+    padding: 10px;
+
+    input {
+      width: 250px;
+    }
+  }
+
+}
+
+.app-about {
+  section {
+    a {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    margin-bottom: 5px;
+  }
+}
+
+// Auth related styles
+
+.auth-header {
+  display: grid;
+  grid-template-columns: 1fr min-content;
+  align-items: center;
+  gap: 10px;
+  height: 30px;
+
+  form {
+    height: 30px;
+  }
+
+  p {
+    margin: 0;
+  }
+
+  button {
+    background: none;
+    border: none;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    color: inherit;
+    text-decoration: inherit;
+    color: $cornFlowerBlue;
+    height: 30px;
+
+    &:hover {
+      @include hovered();
+    }
+  }
+
+  a {
+    color: $cornFlowerBlue;
+
+    &:hover {
+      @include hovered();
+    }
+  }
+}
+
+// crud related styles
+.crud-nav {
+  display: grid;
+  grid-template-columns: 1fr min-content;
+  align-items: center;
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-content: center;
+}
+
+.edit {
+  i {
+    color: $cornFlowerBlue;
+    cursor: pointer;
+  }
+}
+
+.delete {
+  i {
+    color: red;
+    cursor: pointer;
+  }
+}
+
+.modal {
+  z-index: 9999;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  @media (max-width: 768px) {
+    justify-items: center;
+    justify-content: unset;
+  }
+
+  .modal-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: $white;
+    padding: 20px;
+    border-radius: 6px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  }
+}
+
+.highlight {
+  color: $red;
+}
+
+.warning {
+  color: $red;
+}
