@@ -10,7 +10,8 @@ import renderLogo from '../../assets/images/render.svg';
 import restApiLogo from '../../assets/images/rest-api.svg';
 import nodeJsLogo from '../../assets/images/nodejs.svg';
 import mongoDbLogo from '../../assets/images/mongodb.svg';
-import surgeLogo from '../../assets/images/surge.svg';
+import netlifyLogo from '../../assets/images/netlify.svg';
+import githubSourceLogo from '../../assets/images/github-source.svg';
 
 export default function AboutPage(): React.ReactElement {
   return (
@@ -108,9 +109,27 @@ export default function AboutPage(): React.ReactElement {
       <hr />
       <h4>Hosted on</h4>
       <section>
-        <a href="https://surge.sh/" target="_blank" rel="noreferrer">
-          <img src={surgeLogo} alt="Surge logo" width={24} height={24} />
-          <span>Surge</span>
+        <a href="https://www.netlify.com" target="_blank" rel="noreferrer">
+          <img src={netlifyLogo} alt="Netlify logo" width={24} height={24} />
+          <span>Netlify</span>
+        </a>
+      </section>
+
+      <hr />
+      <h4>Source code</h4>
+      <section>
+        <a
+          href="https://github.com/atm-portfolio/admin"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <img
+            src={githubSourceLogo}
+            alt="Github repo logo"
+            width="24"
+            height="24"
+          />
+          <span>Github Repo</span>
         </a>
       </section>
     </div>
