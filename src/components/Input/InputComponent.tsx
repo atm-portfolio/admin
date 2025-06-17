@@ -61,6 +61,7 @@ const Input: React.FC<InputProps> = ({
     onChange: (event: React.ChangeEvent<HTMLSelectElement>) => {
       return onChange ? onChange(event) : context?.handleChange(event);
     },
+    disabled,
   };
 
   if (type === 'textarea') {

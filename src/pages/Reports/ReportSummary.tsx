@@ -20,6 +20,7 @@ import { ReportData } from '../../types/reports';
 import Input from '../../components/Input';
 
 import './ReportSummary.scss';
+import { Link } from 'react-router-dom';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const renderActiveShape = (props: any) => {
@@ -145,7 +146,9 @@ export default function ReportSummary(): React.ReactElement {
 
   return (
     <div className="report">
-      <h3>Reports</h3>
+      <h3>
+        <Link to="/">Home</Link> {'>'} <span>Reports</span>
+      </h3>
 
       <h4>Projects and Products</h4>
 

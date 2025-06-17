@@ -12,6 +12,7 @@ import { Link } from 'react-router-dom';
 import { ProjectColumnType } from '../../types/grid';
 import authProvider from '../../utils/auth';
 import useWindowDimensions from '../../hooks/useWindowDimensions';
+import { getColWidth } from '../../utils/transforms';
 
 function Actions({
   data,
@@ -20,19 +21,22 @@ function Actions({
   data: ProjectColumnType;
   setSelected: React.Dispatch<React.SetStateAction<ProjectColumnType>>;
 }) {
+  const role = authProvider.getRole();
   return (
     <div className="actions">
       <Link className="edit" to={`${ROOT_PATH}/projects/${data._id}`}>
         <i className="fa-solid fa-pen"></i>
       </Link>
-      <a
-        className="delete"
-        onClick={() => {
-          setSelected(data);
-        }}
-      >
-        <i className="fa-solid fa-trash"></i>
-      </a>
+      {role === 'ADMIN' && (
+        <a
+          className="delete"
+          onClick={() => {
+            setSelected(data);
+          }}
+        >
+          <i className="fa-solid fa-trash"></i>
+        </a>
+      )}
     </div>
   );
 }
@@ -45,10 +49,6 @@ function Products({ data }: { data: ProjectColumnType }) {
   );
 }
 
-function getColWidth(width: number): number {
-  return width < 450 ? 70 : 90;
-}
-
 export default function ProjectSummary(): React.ReactElement {
   const gridApi = useRef<GridApi<ProjectColumnType> | null>(null);
   const [width] = useWindowDimensions();
@@ -56,6 +56,8 @@ export default function ProjectSummary(): React.ReactElement {
   const [selected, setSelected] = useState({} as ProjectColumnType);
   const [rowData, setRowData] = useState([] as ProjectColumnType[]);
   const [errorMessage, setErrorMessage] = useState('');
+
+  const role = authProvider.getRole();
 
   useEffect(() => {
     const isAuthenticated = authProvider.checkAuth();
@@ -112,13 +114,15 @@ export default function ProjectSummary(): React.ReactElement {
         <h3>
           <Link to="/">Home</Link> {'>'} <span>Projects</span>
         </h3>
-        <Link to={`${ROOT_PATH}/projects/new`}>
-          <i
-            className="fa-solid fa-circle-plus"
-            title="New Project"
-            style={{ fontSize: 30 }}
-          ></i>
-        </Link>
+        {role === 'ADMIN' && (
+          <Link to={`${ROOT_PATH}/projects/new`}>
+            <i
+              className="fa-solid fa-circle-plus"
+              title="New Project"
+              style={{ fontSize: 30 }}
+            ></i>
+          </Link>
+        )}
       </nav>
 
       <AgGridReact

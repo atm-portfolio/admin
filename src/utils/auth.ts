@@ -13,6 +13,7 @@ interface AuthProvider {
   signOut(): Promise<void>;
   redirectUrl: string | null;
   storeRedirectUrl(url: string): void;
+  getRole(): string;
 }
 
 function certifyAuthentication(token: string) {
@@ -72,6 +73,17 @@ const authProvider: AuthProvider = {
       authProvider.name = userName;
       return true;
     }
+  },
+  getRole() {
+    const token = Storage.get('token.admin');
+
+    if (!token) {
+      return false;
+    }
+
+    const decodedToken = jwtDecoder(token);
+    const { role } = JSON.parse(decodedToken);
+    return role;
   },
   storeRedirectUrl(url: string) {
     authProvider.redirectUrl = url;

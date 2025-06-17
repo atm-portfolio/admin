@@ -5,16 +5,19 @@ body {
   max-width: 100vw;
   margin: 0;
   padding: 0;
-  background-color: #f2f2fd;
 }
 
 a {
   font-weight: 500;
-  color: $mineShaft;
   text-decoration: inherit;
+  color: $mineShaft;
 
   &:hover {
     @include hovered();
+  }
+
+  @media (prefers-color-scheme: dark) {
+    color: $blackHaze;
   }
 }
 
@@ -54,10 +57,15 @@ a {
     @media (max-width: 768px) {
       display: none;
     }
+
+    @media (prefers-color-scheme: dark) {
+      color: #333333;
+    }
   }
 
   .main-menu {
     margin: 0 10px 0 10px;
+    color: $mineShaft;
 
     @media (min-width: 769px) {
       display: none;
@@ -75,6 +83,12 @@ a {
   background-color: $blackHaze;
   z-index: 998;
   align-items: center;
+
+  a {
+    color: $mineShaft;
+  }
+
+  @media (prefers-color-scheme: dark) {}
 
   @media (min-width: 769px) {
     a:first-of-type {
@@ -177,6 +191,7 @@ a {
   }
 
   p {
+    color: $mineShaft;
     margin: 0;
   }
 
@@ -269,4 +284,8 @@ a {
 
 .warning {
   color: $red;
+}
+
+.recharts-wrapper {
+  background: $blackHaze;
 }

@@ -12,11 +12,14 @@ import nodeJsLogo from '../../assets/images/nodejs.svg';
 import mongoDbLogo from '../../assets/images/mongodb.svg';
 import netlifyLogo from '../../assets/images/netlify.svg';
 import githubSourceLogo from '../../assets/images/github-source.svg';
+import { Link } from 'react-router-dom';
 
 export default function AboutPage(): React.ReactElement {
   return (
     <div className="app-about">
-      <h3>About this application</h3>
+      <h3>
+        <Link to="/">Home</Link> {'>'} <span>About</span>
+      </h3>
       <hr />
       <h4>Tech stack used</h4>
       <section>

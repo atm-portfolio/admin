@@ -4,6 +4,7 @@ import { Form as RouterForm, useActionData } from 'react-router-dom';
 import { FormProps, FormValues } from '../../types/form';
 import { FormContext } from '../../context/FormContext';
 import stateProvider from '../../utils/state';
+import authProvider from '../../utils/auth';
 
 import './FormComponent.scss';
 
@@ -13,6 +14,8 @@ const Form: React.FC<FormProps> = ({
   onSubmit,
 }) => {
   const [values, setValues] = useState<FormValues>(initialValues);
+
+  const role = authProvider.getRole();
 
   useEffect(() => {
     if (initialValues && Object.keys(initialValues).length !== 0) {
@@ -54,7 +57,11 @@ const Form: React.FC<FormProps> = ({
           <button
             className="submit"
             type="submit"
-            disabled={isEmpty || stateProvider.isLoading}
+            disabled={
+              isEmpty ||
+              stateProvider.isLoading ||
+              (authProvider.isAuthenticated && role !== 'ADMIN')
+            }
           >
             Submit
           </button>
@@ -70,7 +77,11 @@ const Form: React.FC<FormProps> = ({
           <button
             className="submit"
             type="submit"
-            disabled={isEmpty || stateProvider.isLoading}
+            disabled={
+              isEmpty ||
+              stateProvider.isLoading ||
+              (authProvider.isAuthenticated && role !== 'ADMIN')
+            }
           >
             Submit
           </button>

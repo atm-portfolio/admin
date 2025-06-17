@@ -15,6 +15,7 @@ import authProvider from '../../utils/auth';
 import useWindowDimensions from '../../hooks/useWindowDimensions';
 
 import productImg from '../../assets/images/product.svg';
+import { getColWidth } from '../../utils/transforms';
 
 function Actions({
   data,
@@ -23,19 +24,22 @@ function Actions({
   data: ProductColumnType;
   setSelected: React.Dispatch<React.SetStateAction<ProductColumnType>>;
 }) {
+  const role = authProvider.getRole();
   return (
     <div className="actions">
       <Link className="edit" to={`${ROOT_PATH}/products/${data._id}`}>
         <i className="fa-solid fa-pen"></i>
       </Link>
-      <a
-        className="delete"
-        onClick={() => {
-          setSelected(data);
-        }}
-      >
-        <i className="fa-solid fa-trash"></i>
-      </a>
+      {role === 'ADMIN' && (
+        <a
+          className="delete"
+          onClick={() => {
+            setSelected(data);
+          }}
+        >
+          <i className="fa-solid fa-trash"></i>
+        </a>
+      )}
     </div>
   );
 }
@@ -61,6 +65,8 @@ export default function ProductSummary(): React.ReactElement {
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
+  const role = authProvider.getRole();
+
   useEffect(() => {
     const isAuthenticated = authProvider.checkAuth();
     if (!isAuthenticated) return;
@@ -78,7 +84,9 @@ export default function ProductSummary(): React.ReactElement {
     {
       colId: 'actions',
       headerName: 'Actions',
-      maxWidth: width < 400 ? 130 : 80,
+      width: getColWidth(width),
+      maxWidth: getColWidth(width),
+      minWidth: getColWidth(width),
       cellRenderer: ({ data }: { data: ProductColumnType }) =>
         Actions({ data, setSelected }),
       pinned: 'right',
@@ -115,13 +123,15 @@ export default function ProductSummary(): React.ReactElement {
         <h3>
           <Link to="/">Home</Link> {'>'} <span>Products</span>
         </h3>
-        <Link to={`${ROOT_PATH}/products/new`}>
-          <i
-            className="fa-solid fa-circle-plus"
-            title="New Product"
-            style={{ fontSize: 30 }}
-          ></i>
-        </Link>
+        {role === 'ADMIN' && (
+          <Link to={`${ROOT_PATH}/products/new`}>
+            <i
+              className="fa-solid fa-circle-plus"
+              title="New Product"
+              style={{ fontSize: 30 }}
+            ></i>
+          </Link>
+        )}
       </nav>
 
       <AgGridReact

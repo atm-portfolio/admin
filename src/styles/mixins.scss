@@ -2,4 +2,8 @@
 
 @mixin hovered() {
   color: $codGray;
+
+  @media (prefers-color-scheme: dark) {
+    color: $pampas;
+  }
 }
