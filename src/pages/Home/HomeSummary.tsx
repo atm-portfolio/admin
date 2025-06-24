@@ -57,6 +57,19 @@ export default function HomePage(): React.ReactElement {
 
       <hr />
       <h3>Getting started</h3>
+      <p className="icon-explanation">
+        <i className="fa-solid fa-right-to-bracket auth-link" />
+        <span>
+          Click/Tap the icon located at the top-right corner to log in
+        </span>
+      </p>
+      <p className="icon-explanation">
+        <i className="fa-solid fa-stairs auth-link" />
+        <span>
+          Click/Tap the icon located at the top-right corner to exit the
+          application.
+        </span>
+      </p>
       <p>
         To begin, please log in with an account that has admin privileges to
         access all features and functionality.
